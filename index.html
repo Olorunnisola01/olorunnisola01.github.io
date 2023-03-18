@@ -1,121 +1,35 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Object Detection</title>
-	<style>
-		body {
-			background-color: #f2f2f2;
-			font-family: Arial, sans-serif;
-			margin: 0;
-			padding: 0;
-		}
-
-		.container {
-			max-width: 800px;
-			margin: 0 auto;
-			padding: 40px;
-			background-color: #fff;
-			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-		}
-
-		h1 {
-			font-size: 36px;
-			margin-top: 0;
-		}
-
-		p {
-			font-size: 18px;
-			line-height: 1.5;
-			margin-bottom: 20px;
-		}
-
-		button {
-			background-color: #4CAF50;
-			border: none;
-			color: #fff;
-			padding: 10px 20px;
-			font-size: 18px;
-			cursor: pointer;
-			border-radius: 5px;
-		}
-
-		button:hover {
-			background-color: #3e8e41;
-		}
-
-		input {
-			font-size: 18px;
-			padding: 10px;
-			border-radius: 5px;
-			border: 1px solid #ccc;
-			width: 100%;
-			box-sizing: border-box;
-			margin-bottom: 20px;
-		}
-
-		#output {
-			margin-top: 20px;
-		}
-	</style>
-</head>
-<body>
-	<div class="container">
-		<h1>Object Detection</h1>
-		<p>Enter your image and model data to perform object detection:</p>
-		<label for="image">Image:</label><br>
-		<input type="text" id="image" name="image" value="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="><br>
-		<label for="model">Model:</label><br>
-		<input type="text" id="model" name="model" value="yolov8n"><br>
-		<label for="width">Width:</label><br>
-		<input type="number" id="width" name="width" value="320"><br>
-		<label for="x_offset">X Offset:</label><br>
-		<input type="number" id="x_offset" name="x_offset" value="0"><br>
-		<label for="y_offset">Y Offset:</label><br>
-		<input type="number" id="y_offset" name="y_offset" value="0"><br>
-		<button onclick="runDetection()">Detect Objects</button>
-		<div id="output"></div>
-	</div>
-
-	<script>
-		async function runDetection() {
-			const image = document.getElementById("image").value;
-			const model = document.getElementById("model").value;
-			const width = document.getElementById("width").value;
-			const x_offset = document.getElementById("x_offset").value;
-			const y_offset = document.getElementById("y_offset").value;
-
-			const response = await fetch("https://detomo-object-detection.hf.space/run/predict", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body:
-                <form>
-                    <input type="file" accept="image/*" onchange="handleFile(event)">
-                   <button type="button" onclick="sendData()">Detect Objects</button>
-                 </form>
-                    "yolov8n",
-				320,
-				0,
-				0,
-			]
-		})
-	});
-
-	const data = await response.json();
-
-	// Update the result element with the received data
-	document.getElementById("result").innerHTML = JSON.stringify(data, null, 2);
-}
-</script>
-</head>
-<body>
-	<h1>Object Detection</h1>
-	<div id="input">
-		<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==" alt="Sample Image" />
-		<button onclick="runDetection()">Run Object Detection</button>
-	</div>
-	<div id="output">
-		<h2>Result:</h2>
-		<pre id="result"></pre>
-	</div>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cat or Dog predictor</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+  </head>
+  <body>
+    <a href="https://github.com/nuvic/predict_image"><img loading="lazy" width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_green_007200.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    <header>
+        <h1>Predict a dog or cat from an image</h1>
+        <p>Model provided by <a href="https://github.com/fastai/fastai">fastai</a> and api hosted by <a href="https://hf.space/embed/jph00/testing/api" target="_blank">hugging face</a>
+        </p>
+        <a href="https://github.com/nuvic/predict_image" target="_blank">Github Repo</a>
+    </header>
+    <main>
+        <header>
+            <h2>Submit a picture of either a cat or dog</h2>
+            <p id="prediction"></p>
+            <p id="confidences"></p>
+            <p id="error"></p>
+        </header>
+        <section>
+            <img id="myImage" height="400" width="400">
+            <form id="form">
+                <label for="fileInput"></label>
+                <input id="fileInput" type="file" onchange="onFileSelected(event)" name="File">
+            </form>
+        </section>
+    </main>
+	<script src="index.js"></script>
+  </body>
 </html>
